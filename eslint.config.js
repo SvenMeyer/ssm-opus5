@@ -17,7 +17,11 @@ export default ts.config(
 			'@typescript-eslint/no-unused-vars': [
 				'error',
 				{ argsIgnorePattern: '^_', varsIgnorePattern: '^_' }
-			]
+			],
+			// This app is served from the root and configures no `base` path, so wrapping
+			// every internal href in resolve() would add noise without buying anything.
+			// Turn it back on the day a base path is introduced.
+			'svelte/no-navigation-without-resolve': 'off'
 		}
 	},
 	{

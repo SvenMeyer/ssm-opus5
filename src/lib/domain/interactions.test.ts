@@ -137,6 +137,98 @@ describe('timing rules', () => {
 	});
 });
 
+describe('fix refinement across the whole rulebook', () => {
+	const IRON_FASTED: Rule = {
+		id: 'iron-fasted',
+		kind: 'timing',
+		title: 'Iron absorbs best fasted',
+		message: 'Take it away from food.',
+		severity: 'info',
+		a: ['iron'],
+		wants: { food: 'without' }
+	};
+
+	it('never proposes a move that walks into another rule', () => {
+		// Iron wants an empty stomach; the only fasted slot is 06:30, and zinc sits at
+		// 08:00 — moving there would trade a timing note for a mineral conflict.
+		const data = makeData({
+			products: [zincProduct, ironProduct],
+			stack: [
+				stackItem('s-zinc', 'zinc-p', [{ slotId: 'fasting', servings: 1, withFood: 'without' }]),
+				stackItem('s-iron', 'iron-p', [{ slotId: 'am', servings: 1, withFood: 'with' }])
+			]
+		});
+
+		const finding = evaluateInteractions(data, [IRON_FASTED, ZINC_IRON]).find(
+			(f) => f.ruleId === 'iron-fasted'
+		);
+
+		expect(finding).toBeDefined();
+		if (finding?.fix && finding.fix.type === 'move-dose') {
+			const after = { ...data, stack: applyFix(data.stack, finding.fix) };
+			const before = evaluateInteractions(data, [IRON_FASTED, ZINC_IRON]).filter(
+				(f) => !f.positive
+			).length;
+			const now = evaluateInteractions(after, [IRON_FASTED, ZINC_IRON]).filter(
+				(f) => !f.positive
+			).length;
+			expect(now).toBeLessThan(before);
+		}
+	});
+
+	it('falls back to marking the dose when the day has no suitable slot', () => {
+		// Every slot is a meal slot, so "take it fasted" has nowhere to move to — but
+		// taking it half an hour before the meal is still a real answer.
+		const mealsOnly = makeData({
+			slots: [
+				{ id: 'a', label: 'A', time: '08:00', kind: 'meal' },
+				{ id: 'b', label: 'B', time: '13:00', kind: 'meal' },
+				{ id: 'c', label: 'C', time: '19:00', kind: 'meal' }
+			],
+			products: [ironProduct],
+			stack: [stackItem('s-iron', 'iron-p', [{ slotId: 'a', servings: 1, withFood: 'with' }])]
+		});
+
+		const finding = evaluateInteractions(mealsOnly, [IRON_FASTED])[0];
+		expect(finding.fix?.type).toBe('set-food');
+	});
+
+	it('drops the fix button when every destination trades one problem for another', () => {
+		const calciumProduct = product('cal-p', [{ nutrientId: 'calcium', amountPerServing: 500 }]);
+		const CALCIUM_IRON: Rule = {
+			id: 'calcium-iron',
+			kind: 'conflict',
+			title: 'Calcium blocks iron',
+			message: 'Keep them apart.',
+			severity: 'warning',
+			a: ['calcium'],
+			b: ['iron'],
+			minSeparationHours: 3
+		};
+
+		// Iron clashes with zinc where it is, and calcium occupies every slot it could
+		// move to. There is no good answer, so the honest thing is not to offer one.
+		const data = makeData({
+			products: [zincProduct, ironProduct, calciumProduct],
+			stack: [
+				stackItem('s-zinc', 'zinc-p', [{ slotId: 'am', servings: 1, withFood: 'with' }]),
+				stackItem('s-iron', 'iron-p', [{ slotId: 'am', servings: 1, withFood: 'with' }]),
+				stackItem('s-cal', 'cal-p', [
+					{ slotId: 'noon', servings: 1, withFood: 'with' },
+					{ slotId: 'pm', servings: 1, withFood: 'with' },
+					{ slotId: 'night', servings: 1, withFood: 'with' }
+				])
+			]
+		});
+
+		const finding = evaluateInteractions(data, [ZINC_IRON, CALCIUM_IRON]).find(
+			(f) => f.ruleId === 'zinc-iron'
+		);
+		expect(finding).toBeDefined();
+		expect(finding?.fix).toBeUndefined();
+	});
+});
+
 describe('synergy rules', () => {
 	it('reads as a suggestion when the pair is split across slots', () => {
 		const data = makeData({

@@ -95,7 +95,12 @@ class AppStore {
 	findings = $derived<Finding[]>(
 		[...ceilingFindings(this.totals), ...this.interactionFindings].sort(compareFindings)
 	);
-	problems = $derived(this.findings.filter((f) => !f.positive));
+	/**
+	 * Three buckets, not two. A synergy you are not yet exploiting is an opportunity,
+	 * not a problem — filing it under warnings would train the user to ignore warnings.
+	 */
+	problems = $derived(this.findings.filter((f) => !f.positive && f.kind !== 'synergy'));
+	suggestions = $derived(this.findings.filter((f) => !f.positive && f.kind === 'synergy'));
 	wins = $derived(this.findings.filter((f) => f.positive));
 
 	inventory = $derived(inventoryForStack(this.#data));

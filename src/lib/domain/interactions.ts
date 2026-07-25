@@ -368,13 +368,7 @@ export function compareFindings(a: Finding, b: Finding): number {
 	return a.title.localeCompare(b.title);
 }
 
-/**
- * Evaluate all rules against the *scheduled* stack.
- *
- * The distinction matters: zinc and iron in the same stack is not a problem, zinc and
- * iron in the same slot is. Ingredient lists alone would cry wolf on every finding here.
- */
-export function evaluateInteractions(data: AppData, rules: Rule[]): Finding[] {
+function evaluateRules(data: AppData, rules: Rule[]): Finding[] {
 	const ctx = buildCtx(data);
 	const findings: Finding[] = [];
 
@@ -384,7 +378,76 @@ export function evaluateInteractions(data: AppData, rules: Rule[]): Finding[] {
 		else findings.push(...evaluateTiming(ctx, rule));
 	}
 
-	return findings.sort(compareFindings);
+	return findings;
+}
+
+function problemCount(data: AppData, rules: Rule[]): number {
+	return evaluateRules(data, rules).filter((f) => !f.positive).length;
+}
+
+/**
+ * Check every proposed move against the *whole* rulebook, not just the rule that
+ * proposed it.
+ *
+ * Each rule reasons in isolation, so "iron absorbs best fasted" will happily suggest
+ * moving iron to the wake slot — straight into the zinc it was told to avoid. This pass
+ * simulates each move, keeps the target slot that leaves the stack with the fewest
+ * problems overall, and drops the button entirely when no slot actually helps. A fix
+ * that trades one warning for another is worse than no fix, because the user trusts it.
+ */
+function refineFix(finding: Finding, data: AppData, rules: Rule[], baseline: number): Finding {
+	const fix = finding.fix;
+	if (!fix) return finding;
+
+	// Synergy fixes are about combining two doses; there is nothing to search for.
+	if (finding.kind === 'synergy') return finding;
+
+	if (fix.type === 'set-food') {
+		const after = problemCount({ ...data, stack: applyFix(data.stack, fix) }, rules);
+		return after < baseline ? finding : { ...finding, fix: undefined };
+	}
+
+	const candidates = [
+		fix.toSlotId,
+		...data.slots.map((s) => s.id).filter((id) => id !== fix.fromSlotId && id !== fix.toSlotId)
+	];
+
+	let best: { slotId: string; problems: number } | null = null;
+	for (const slotId of candidates) {
+		const problems = problemCount(
+			{ ...data, stack: applyFix(data.stack, { ...fix, toSlotId: slotId }) },
+			rules
+		);
+		// Strictly better wins; ties keep the earlier candidate, so the rule's own
+		// preferred slot stays first choice when nothing beats it.
+		if (!best || problems < best.problems) best = { slotId, problems };
+	}
+
+	if (!best || best.problems >= baseline) return { ...finding, fix: undefined };
+	if (best.slotId === fix.toSlotId) return finding;
+
+	const slot = data.slots.find((s) => s.id === best!.slotId);
+	if (!slot) return finding;
+	return {
+		...finding,
+		fix: {
+			...fix,
+			toSlotId: slot.id,
+			label: `${fix.label.split(' to ')[0]} to ${slot.label}`
+		}
+	};
+}
+
+/**
+ * Evaluate all rules against the *scheduled* stack.
+ *
+ * The distinction matters: zinc and iron in the same stack is not a problem, zinc and
+ * iron in the same slot is. Ingredient lists alone would cry wolf on every finding here.
+ */
+export function evaluateInteractions(data: AppData, rules: Rule[]): Finding[] {
+	const findings = evaluateRules(data, rules);
+	const baseline = findings.filter((f) => !f.positive).length;
+	return findings.map((f) => refineFix(f, data, rules, baseline)).sort(compareFindings);
 }
 
 /** Ceiling breaches expressed as findings, so one page can show every risk together. */
