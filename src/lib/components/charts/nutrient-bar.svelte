@@ -68,6 +68,12 @@
 
 	const tone = $derived(nutrientTone(status));
 	const fill = $derived(Math.min(100, position(amount)));
+
+	/**
+	 * With no reference value there is no scale, so the bar fills completely — a solid
+	 * block would read as "maxed out". Muted, it reads as what it is: present, unmeasured.
+	 */
+	const fillClass = $derived(status === 'unrated' ? 'bg-inert/30' : TONE_BG[tone]);
 </script>
 
 <div class={cn('relative w-full', height === 'sm' ? 'h-2.5' : 'h-3.5')}>
@@ -78,7 +84,7 @@
 		)}
 	>
 		<div
-			class={cn('h-full rounded-full transition-[width] duration-300', TONE_BG[tone])}
+			class={cn('h-full rounded-full transition-[width] duration-300', fillClass)}
 			style="width: {fill}%"
 		></div>
 	</div>

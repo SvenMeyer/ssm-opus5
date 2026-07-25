@@ -5,7 +5,7 @@
 	import EmptyState from '$lib/components/ui/empty-state.svelte';
 	import Segmented from '$lib/components/ui/segmented.svelte';
 	import { store } from '$lib/data/store.svelte';
-	import { formatTime } from '$lib/domain/date';
+	import { formatDate, formatTime } from '$lib/domain/date';
 	import type { StackItem } from '$lib/domain/types';
 	import { money, plural } from '$lib/utils/format';
 	import LayoutGrid from '@lucide/svelte/icons/layout-grid';
@@ -109,15 +109,17 @@
 		<ul class="grid gap-2 sm:grid-cols-2">
 			{#each store.reorder as status (status.stackItemId)}
 				{@const product = store.productById.get(status.productId)}
+				<!-- min-w-0 disables the grid item's automatic minimum size; without it the
+				     nowrap product name pushes the row past the viewport on a phone. -->
 				<li
-					class="bg-surface border-hairline flex items-center justify-between gap-3 rounded-lg border px-3 py-2"
+					class="bg-surface border-hairline flex min-w-0 items-center justify-between gap-3 rounded-lg border px-3 py-2"
 				>
-					<div class="min-w-0">
+					<div class="min-w-0 flex-1">
 						<a href="/stack/{status.stackItemId}" class="hover:text-accent block truncate text-sm">
 							{product?.name}
 						</a>
-						<span class="text-ink-faint text-xs">
-							runs out {status.runoutDate ? status.runoutDate : '—'}
+						<span class="text-ink-faint block truncate text-xs">
+							runs out {status.runoutDate ? formatDate(status.runoutDate) : '—'}
 						</span>
 					</div>
 					<div class="flex shrink-0 items-center gap-2">

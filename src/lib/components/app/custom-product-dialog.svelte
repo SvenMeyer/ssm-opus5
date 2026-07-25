@@ -114,15 +114,16 @@
 							class="flex-1"
 							aria-label="Nutrient {i + 1}"
 						/>
-						<TextInput
-							bind:value={rows[i].amount}
-							type="number"
-							min="0"
-							step="any"
-							placeholder="Amount"
-							class="w-28"
-							aria-label="Amount {i + 1}"
-						/>
+						<div class="w-28 shrink-0">
+							<TextInput
+								bind:value={rows[i].amount}
+								type="number"
+								min="0"
+								step="any"
+								placeholder="Amount"
+								aria-label="Amount {i + 1}"
+							/>
+						</div>
 						<button
 							type="button"
 							onclick={() => (rows = rows.filter((_, index) => index !== i))}

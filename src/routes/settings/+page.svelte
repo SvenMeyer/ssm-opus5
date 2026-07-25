@@ -78,12 +78,15 @@
 			{#each store.slots as slot (slot.id)}
 				{@const count = dosesIn(slot.id)}
 				<div class="flex flex-wrap items-center gap-3 px-4 py-3">
-					<TextInput
-						value={slot.label}
-						aria-label="{slot.label} name"
-						class="w-36"
-						oninput={(e) => store.saveSlot({ ...slot, label: e.currentTarget.value })}
-					/>
+					<!-- TextInput is w-full by design; sizing goes on a wrapper so the two
+					     width utilities never fight over specificity. -->
+					<div class="w-40">
+						<TextInput
+							value={slot.label}
+							aria-label="{slot.label} name"
+							oninput={(e) => store.saveSlot({ ...slot, label: e.currentTarget.value })}
+						/>
+					</div>
 					<input
 						type="time"
 						value={slot.time}
