@@ -184,6 +184,7 @@
 				<h2 class="mb-3 text-sm font-semibold">Notes</h2>
 				<textarea
 					bind:value={notes}
+					name="item-notes"
 					onblur={() => store.updateItem(item!.id, { notes })}
 					rows="3"
 					placeholder="Why you take it, what you have noticed, what to ask the doctor…"
@@ -230,16 +231,18 @@
 				<dl class="space-y-1.5 text-sm">
 					<div class="flex justify-between">
 						<dt class="text-ink-soft">Per day</dt>
-						<dd class="tnum">{money(costPerDay(item, product), product.currency)}</dd>
+						<dd class="tnum">{money(costPerDay(item, product), store.settings.currency)}</dd>
 					</div>
 					<div class="flex justify-between">
 						<dt class="text-ink-soft">Per month</dt>
-						<dd class="tnum">{money(costPerDay(item, product) * 30.44, product.currency)}</dd>
+						<dd class="tnum">
+							{money(costPerDay(item, product) * 30.44, store.settings.currency)}
+						</dd>
 					</div>
 					<div class="flex justify-between">
 						<dt class="text-ink-soft">Container</dt>
 						<dd class="tnum">
-							{money(product.price, product.currency)} / {product.unitsPerContainer}
+							{money(product.price, store.settings.currency)} / {product.unitsPerContainer}
 						</dd>
 					</div>
 				</dl>

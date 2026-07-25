@@ -146,7 +146,7 @@
 
 				<div class="border-hairline mt-3 flex items-center justify-between border-t pt-2.5">
 					<div class="text-xs">
-						<span class="tnum">{money(product.price, product.currency)}</span>
+						<span class="tnum">{money(product.price, store.settings.currency)}</span>
 						<span class="text-ink-faint">
 							· {units(product.unitsPerServing, product.form)}/serving
 						</span>

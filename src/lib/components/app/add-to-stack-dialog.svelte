@@ -135,7 +135,7 @@
 		{#if product}
 			<span class="tnum text-ink-faint mr-auto self-center text-xs">
 				{dailyServings > 0
-					? `${money((product.price / product.unitsPerContainer) * product.unitsPerServing * dailyServings, product.currency)} a day`
+					? `${money((product.price / product.unitsPerContainer) * product.unitsPerServing * dailyServings, store.settings.currency)} a day`
 					: 'Pick at least one slot'}
 			</span>
 		{/if}

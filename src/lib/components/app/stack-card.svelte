@@ -92,7 +92,7 @@
 		{/if}
 
 		<div class="border-hairline mt-3.5 flex items-center justify-between border-t pt-2.5 text-xs">
-			<span class="tnum text-ink-faint">{money(perDay, product.currency)}/day</span>
+			<span class="tnum text-ink-faint">{money(perDay, store.settings.currency)}/day</span>
 			{#if issues.length > 0}
 				<a href="/interactions" class="text-warn flex items-center gap-1 hover:underline">
 					<TriangleAlert size={11} />

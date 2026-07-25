@@ -53,8 +53,20 @@ export class LocalRepository implements Repository {
 		}
 	}
 
+	/**
+	 * Reads the cache synchronously when it is warm, and only awaits on the very first
+	 * call.
+	 *
+	 * This matters more than it looks. Several operations write two tables at once —
+	 * removing a slot saves both `slots` and `stack`, ticking a dose saves both `logs`
+	 * and `stack`. With an unconditional `await this.load()` both calls suspend, both
+	 * resume holding the *same* pre-update document, and the second one overwrites the
+	 * first: the change appeared in the UI and silently vanished on the next reload.
+	 * An async function runs synchronously up to its first await, so avoiding the await
+	 * on the warm path serialises the writes.
+	 */
 	async #patch(patch: Partial<AppData>): Promise<void> {
-		const data = await this.load();
+		const data = this.#cache ?? (await this.load());
 		this.#cache = { ...data, ...patch };
 		this.#flush();
 	}

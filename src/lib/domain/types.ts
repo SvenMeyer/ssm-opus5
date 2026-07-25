@@ -46,9 +46,13 @@ export interface Product {
 	unitsPerServing: number;
 	/** Physical units in a full container. */
 	unitsPerContainer: number;
-	/** Price of one container, in `currency`. */
+	/**
+	 * Price of one container, in the single currency configured in Settings. Prices are
+	 * not stored per product: this prototype has no exchange rates, and a product priced
+	 * in one currency sitting in a total denominated in another would be a lie told with
+	 * a currency symbol.
+	 */
 	price: number;
-	currency: string;
 	ingredients: Ingredient[];
 	tags: string[];
 	/** True for products the user typed in themselves rather than picking from the catalog. */

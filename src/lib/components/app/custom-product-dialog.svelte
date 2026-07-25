@@ -64,7 +64,6 @@
 			unitsPerServing: Number(unitsPerServing) || 1,
 			unitsPerContainer: Number(unitsPerContainer),
 			price: Number(price) || 0,
-			currency: store.settings.currency,
 			ingredients,
 			tags: ['custom']
 		});
@@ -90,7 +89,7 @@
 
 		<div class="grid gap-3 sm:grid-cols-4">
 			<Field label="Form">
-				<SelectInput bind:value={form} options={formOptions} />
+				<SelectInput bind:value={form} options={formOptions} name="custom-product-form" />
 			</Field>
 			<Field label="Units / serving" hint="e.g. 2 capsules">
 				<TextInput bind:value={unitsPerServing} type="number" min="0.5" step="0.5" />

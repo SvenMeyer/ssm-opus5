@@ -16,7 +16,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 120,
 		price: 18.9,
-		currency: 'EUR',
 		tags: ['fat-soluble', 'bone', 'winter'],
 		ingredients: [
 			{ nutrientId: 'vitamin-d', amountPerServing: 100 },
@@ -32,7 +31,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 2,
 		unitsPerContainer: 180,
 		price: 24.5,
-		currency: 'EUR',
 		tags: ['sleep', 'relaxation', 'well-tolerated'],
 		ingredients: [{ nutrientId: 'magnesium', amountPerServing: 200 }],
 		notes: 'Glycinate is the form least likely to loosen the bowels.'
@@ -45,7 +43,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 2,
 		unitsPerContainer: 120,
 		price: 29.9,
-		currency: 'EUR',
 		tags: ['fish oil', 'heart', 'brain'],
 		ingredients: [
 			{ nutrientId: 'epa', amountPerServing: 660 },
@@ -61,7 +58,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 90,
 		price: 11.5,
-		currency: 'EUR',
 		tags: ['immune', 'skin'],
 		ingredients: [{ nutrientId: 'zinc', amountPerServing: 25 }]
 	},
@@ -73,7 +69,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 90,
 		price: 13.9,
-		currency: 'EUR',
 		tags: ['bisglycinate', 'blood'],
 		ingredients: [
 			{ nutrientId: 'iron', amountPerServing: 25 },
@@ -89,7 +84,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 2,
 		unitsPerContainer: 60,
 		price: 26.0,
-		currency: 'EUR',
 		tags: ['multivitamin', 'baseline'],
 		ingredients: [
 			{ nutrientId: 'vitamin-a', amountPerServing: 700 },
@@ -120,7 +114,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 22.0,
-		currency: 'EUR',
 		tags: ['performance', 'creapure', 'unflavoured'],
 		ingredients: [{ nutrientId: 'creatine', amountPerServing: 5 }],
 		notes: 'One 5 g scoop. Timing does not matter; daily consistency does.'
@@ -133,7 +126,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 19.0,
-		currency: 'EUR',
 		tags: ['adaptogen', 'stress'],
 		ingredients: [{ nutrientId: 'ashwagandha', amountPerServing: 600 }]
 	},
@@ -145,7 +137,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 120,
 		price: 16.0,
-		currency: 'EUR',
 		tags: ['calm', 'focus'],
 		ingredients: [{ nutrientId: 'l-theanine', amountPerServing: 200 }]
 	},
@@ -157,7 +148,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 180,
 		price: 9.5,
-		currency: 'EUR',
 		tags: ['sleep', 'jet lag'],
 		ingredients: [{ nutrientId: 'melatonin', amountPerServing: 0.5 }],
 		notes: 'Deliberately low. Most people do better on 0.3–1 mg than on 5 mg.'
@@ -170,7 +160,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 21.0,
-		currency: 'EUR',
 		tags: ['methylated', 'energy'],
 		ingredients: [
 			{ nutrientId: 'thiamin', amountPerServing: 25 },
@@ -191,7 +180,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 100,
 		price: 12.0,
-		currency: 'EUR',
 		tags: ['immune', 'antioxidant'],
 		ingredients: [{ nutrientId: 'vitamin-c', amountPerServing: 1000 }]
 	},
@@ -203,7 +191,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 2,
 		unitsPerContainer: 60,
 		price: 32.0,
-		currency: 'EUR',
 		tags: ['anti-inflammatory', 'joints'],
 		ingredients: [
 			{ nutrientId: 'curcumin', amountPerServing: 500 },
@@ -218,7 +205,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 38.0,
-		currency: 'EUR',
 		tags: ['mitochondrial', 'statin support'],
 		ingredients: [{ nutrientId: 'coq10', amountPerServing: 100 }]
 	},
@@ -230,7 +216,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 30,
 		price: 34.0,
-		currency: 'EUR',
 		tags: ['skin', 'joints', 'type I & III'],
 		ingredients: [
 			{ nutrientId: 'collagen', amountPerServing: 10 },
@@ -245,7 +230,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 30,
 		price: 29.0,
-		currency: 'EUR',
 		tags: ['gut', 'refrigerate'],
 		ingredients: [{ nutrientId: 'probiotic', amountPerServing: 50 }]
 	},
@@ -257,7 +241,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 3,
 		unitsPerContainer: 90,
 		price: 15.0,
-		currency: 'EUR',
 		tags: ['bone', 'value'],
 		ingredients: [
 			{ nutrientId: 'calcium', amountPerServing: 1000 },
@@ -274,7 +257,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 18.0,
-		currency: 'EUR',
 		tags: ['sleep', 'sweet-tasting'],
 		ingredients: [{ nutrientId: 'glycine', amountPerServing: 3 }]
 	},
@@ -286,7 +268,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 90,
 		price: 17.5,
-		currency: 'EUR',
 		tags: ['glutathione', 'liver'],
 		ingredients: [{ nutrientId: 'nac', amountPerServing: 600 }]
 	},
@@ -298,7 +279,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 20.0,
-		currency: 'EUR',
 		tags: ['antioxidant', 'glucose'],
 		ingredients: [{ nutrientId: 'alpha-lipoic-acid', amountPerServing: 300 }]
 	},
@@ -310,7 +290,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 2,
 		unitsPerContainer: 60,
 		price: 27.0,
-		currency: 'EUR',
 		tags: ['mushroom', 'nootropic'],
 		ingredients: [{ nutrientId: 'lions-mane', amountPerServing: 1000 }]
 	},
@@ -322,7 +301,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 18.5,
-		currency: 'EUR',
 		tags: ['adaptogen', 'stimulating'],
 		ingredients: [{ nutrientId: 'rhodiola', amountPerServing: 400 }]
 	},
@@ -334,7 +312,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 16.5,
-		currency: 'EUR',
 		tags: ['nootropic', 'slow-acting'],
 		ingredients: [{ nutrientId: 'bacopa', amountPerServing: 300 }]
 	},
@@ -346,7 +323,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 2,
 		unitsPerContainer: 120,
 		price: 24.0,
-		currency: 'EUR',
 		tags: ['joints', 'cartilage'],
 		ingredients: [
 			{ nutrientId: 'glucosamine', amountPerServing: 1500 },
@@ -362,7 +338,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 90,
 		price: 15.0,
-		currency: 'EUR',
 		tags: ['stimulant', 'focus'],
 		ingredients: [
 			{ nutrientId: 'caffeine', amountPerServing: 100 },
@@ -377,7 +352,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 30,
 		price: 26.0,
-		currency: 'EUR',
 		tags: ['hydration', 'training'],
 		ingredients: [
 			{ nutrientId: 'potassium', amountPerServing: 400 },
@@ -392,7 +366,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 120,
 		price: 9.0,
-		currency: 'EUR',
 		tags: ['thyroid', 'whole-food'],
 		ingredients: [{ nutrientId: 'iodine', amountPerServing: 150 }]
 	},
@@ -404,7 +377,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 90,
 		price: 12.5,
-		currency: 'EUR',
 		tags: ['thyroid', 'antioxidant'],
 		ingredients: [{ nutrientId: 'selenium', amountPerServing: 200 }]
 	},
@@ -416,7 +388,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 100,
 		price: 13.0,
-		currency: 'EUR',
 		tags: ['fat-soluble', 'skin'],
 		ingredients: [{ nutrientId: 'vitamin-a', amountPerServing: 900 }]
 	},
@@ -428,7 +399,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 16.0,
-		currency: 'EUR',
 		tags: ['fat-soluble', 'antioxidant'],
 		ingredients: [{ nutrientId: 'vitamin-e', amountPerServing: 100 }]
 	},
@@ -440,7 +410,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 2,
 		unitsPerContainer: 60,
 		price: 17.0,
-		currency: 'EUR',
 		tags: ['immune', 'winter', 'contains sugar'],
 		ingredients: [
 			{ nutrientId: 'elderberry', amountPerServing: 200 },
@@ -456,7 +425,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 100,
 		price: 14.0,
-		currency: 'EUR',
 		tags: ['endurance', 'heart'],
 		ingredients: [{ nutrientId: 'taurine', amountPerServing: 1000 }]
 	},
@@ -468,7 +436,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 120,
 		price: 16.0,
-		currency: 'EUR',
 		tags: ['focus', 'stress'],
 		ingredients: [{ nutrientId: 'l-tyrosine', amountPerServing: 500 }]
 	},
@@ -480,7 +447,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 19.0,
-		currency: 'EUR',
 		tags: ['performance', 'unflavoured'],
 		ingredients: [{ nutrientId: 'betaine', amountPerServing: 2500 }]
 	},
@@ -492,7 +458,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 25.0,
-		currency: 'EUR',
 		tags: ['nootropic', 'acetylcholine'],
 		ingredients: [{ nutrientId: 'choline', amountPerServing: 300 }]
 	},
@@ -504,7 +469,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 100,
 		price: 9.0,
-		currency: 'EUR',
 		tags: ['bone', 'hormonal'],
 		ingredients: [{ nutrientId: 'boron', amountPerServing: 3 }]
 	},
@@ -516,7 +480,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 28.0,
-		currency: 'EUR',
 		tags: ['mood', 'expensive'],
 		ingredients: [{ nutrientId: 'saffron-extract', amountPerServing: 30 }]
 	},
@@ -528,7 +491,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 90,
 		price: 13.0,
-		currency: 'EUR',
 		tags: ['digestion', 'anti-inflammatory'],
 		ingredients: [{ nutrientId: 'ginger', amountPerServing: 500 }]
 	},
@@ -540,7 +502,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 100,
 		price: 8.5,
-		currency: 'EUR',
 		tags: ['mineral balance'],
 		ingredients: [{ nutrientId: 'copper', amountPerServing: 2 }]
 	},
@@ -552,7 +513,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 48,
 		price: 21.0,
-		currency: 'EUR',
 		tags: ['traditional', 'contains vitamin A'],
 		ingredients: [
 			{ nutrientId: 'vitamin-a', amountPerServing: 250 },
@@ -570,7 +530,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 100,
 		price: 8.0,
-		currency: 'EUR',
 		tags: ['electrolyte'],
 		ingredients: [{ nutrientId: 'potassium', amountPerServing: 99 }]
 	},
@@ -582,7 +541,6 @@ export const SEED_PRODUCTS: Product[] = [
 		unitsPerServing: 1,
 		unitsPerContainer: 100,
 		price: 8.0,
-		currency: 'EUR',
 		tags: ['glucose'],
 		ingredients: [{ nutrientId: 'chromium', amountPerServing: 200 }]
 	}

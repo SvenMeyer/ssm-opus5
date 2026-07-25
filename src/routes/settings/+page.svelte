@@ -8,6 +8,7 @@
 	import TextInput from '$lib/components/ui/text-input.svelte';
 	import Toggle from '$lib/components/ui/toggle.svelte';
 	import { store } from '$lib/data/store.svelte';
+	import { today } from '$lib/domain/date';
 	import type { SlotKind } from '$lib/domain/types';
 	import { plural } from '$lib/utils/format';
 	import Download from '@lucide/svelte/icons/download';
@@ -45,7 +46,9 @@
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
 		a.href = url;
-		a.download = `supplement-stack-${new Date().toISOString().slice(0, 10)}.json`;
+		// today(), not toISOString() — the latter is UTC and stamps yesterday's date on
+		// an evening export anywhere west of Greenwich.
+		a.download = `supplement-stack-${today()}.json`;
 		a.click();
 		URL.revokeObjectURL(url);
 	}
@@ -91,6 +94,7 @@
 						type="time"
 						value={slot.time}
 						aria-label="{slot.label} time"
+						name="slot-time-{slot.id}"
 						onchange={(e) => store.saveSlot({ ...slot, time: e.currentTarget.value })}
 						class="border-hairline bg-surface tnum focus:border-accent h-9.5 rounded-lg border px-2 text-sm focus:outline-none"
 					/>
@@ -117,17 +121,19 @@
 
 		<div class="card mt-3 flex flex-wrap items-end gap-3 p-4">
 			<Field label="New slot" class="w-40">
-				<TextInput bind:value={newLabel} placeholder="Afternoon" />
+				<TextInput bind:value={newLabel} name="new-slot-label" placeholder="Afternoon" />
 			</Field>
 			<Field label="Time">
 				<input
 					type="time"
 					bind:value={newTime}
+					name="new-slot-time"
+					aria-label="New slot time"
 					class="border-hairline bg-surface tnum focus:border-accent h-9.5 rounded-lg border px-2 text-sm focus:outline-none"
 				/>
 			</Field>
 			<Field label="Kind" class="w-44">
-				<SelectInput bind:value={newKind} options={KIND_OPTIONS} />
+				<SelectInput bind:value={newKind} options={KIND_OPTIONS} name="new-slot-kind" />
 			</Field>
 			<Button
 				variant="primary"
@@ -165,7 +171,10 @@
 			<div class="border-hairline flex flex-wrap items-center justify-between gap-3 border-t pt-4">
 				<div>
 					<p class="text-sm font-medium">Currency</p>
-					<p class="text-ink-faint text-xs">Used for every cost figure in the app.</p>
+					<p class="text-ink-faint text-xs">
+						All prices are held in one currency. Switching relabels every figure — it does not
+						convert, because this prototype carries no exchange rates.
+					</p>
 				</div>
 				<SelectInput
 					value={store.settings.currency}
@@ -236,6 +245,8 @@
 >
 	<textarea
 		bind:value={importText}
+		name="import-json"
+		aria-label="Exported JSON to import"
 		rows="10"
 		placeholder="Paste the contents of your export file…"
 		class="border-hairline bg-surface placeholder:text-ink-faint focus:border-accent w-full rounded-lg border px-3 py-2 font-mono text-xs focus:outline-none"

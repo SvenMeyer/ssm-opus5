@@ -24,7 +24,6 @@ export function product(id: string, ingredients: Ingredient[], overrides: Partia
 		unitsPerServing: 1,
 		unitsPerContainer: 60,
 		price: 30,
-		currency: 'EUR',
 		ingredients,
 		tags: [],
 		...overrides

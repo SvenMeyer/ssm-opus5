@@ -92,7 +92,7 @@
 		/>
 		{#if store.pausedStack.length > 0}
 			<label class="text-ink-soft flex items-center gap-2 text-xs">
-				<input type="checkbox" bind:checked={showPaused} class="accent-accent" />
+				<input type="checkbox" name="show-paused" bind:checked={showPaused} class="accent-accent" />
 				Show {store.pausedStack.length} paused
 			</label>
 		{/if}

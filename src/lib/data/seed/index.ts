@@ -13,7 +13,7 @@ export { SEED_GOALS, SEED_PRODUCTS, SEED_RULES, SEED_SLOTS };
  * discarded rather than migrated — acceptable for a prototype whose data is all demo
  * data, and the reason Settings has an explicit export button.
  */
-export const DATA_VERSION = 1;
+export const DATA_VERSION = 2;
 
 export function createSeedData(): AppData {
 	const stack = seedStack();

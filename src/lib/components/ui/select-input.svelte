@@ -7,6 +7,7 @@
 		options,
 		class: klass,
 		id,
+		name,
 		onchange,
 		'aria-label': ariaLabel
 	}: {
@@ -14,14 +15,21 @@
 		options: { value: string; label: string }[];
 		class?: string;
 		id?: string;
+		name?: string;
 		onchange?: (value: string) => void;
 		'aria-label'?: string;
 	} = $props();
+
+	// See text-input.svelte: a name derived from the label keeps Chrome quiet without
+	// asking every call site to repeat itself. Selects wrapped in a <Field> get their
+	// label from the surrounding <label> instead, so those pass `name` explicitly.
+	const resolvedName = $derived(name ?? ariaLabel?.toLowerCase().replace(/[^a-z0-9]+/g, '-') ?? id);
 </script>
 
 <div class={cn('relative', klass)}>
 	<select
 		{id}
+		name={resolvedName}
 		aria-label={ariaLabel}
 		bind:value
 		onchange={(e) => onchange?.(e.currentTarget.value)}

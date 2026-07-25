@@ -12,6 +12,8 @@
 		description?: string;
 		onchange?: (checked: boolean) => void;
 	} = $props();
+
+	const name = $derived(label.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
 </script>
 
 <label class="flex cursor-pointer items-start justify-between gap-4">
@@ -23,6 +25,7 @@
 	</span>
 	<input
 		type="checkbox"
+		{name}
 		bind:checked
 		onchange={() => onchange?.(checked)}
 		class="peer sr-only"

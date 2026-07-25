@@ -58,6 +58,7 @@
 			<input
 				type="date"
 				bind:value={date}
+				name="journal-date"
 				max={today()}
 				aria-label="Entry date"
 				class="border-hairline bg-surface text-ink-soft focus:border-accent rounded-lg border px-2 py-1 text-xs focus:outline-none"
@@ -100,6 +101,7 @@
 				<span class="mb-1.5 block text-sm">Note</span>
 				<textarea
 					bind:value={draft.note}
+					name="journal-note"
 					rows="3"
 					placeholder="Slept through for once. Knees quieter on the stairs."
 					class="border-hairline bg-surface placeholder:text-ink-faint focus:border-accent w-full rounded-lg border px-3 py-2 text-sm focus:outline-none"
