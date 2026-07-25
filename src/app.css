@@ -1,0 +1,144 @@
+@import 'tailwindcss';
+
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/fraunces';
+
+/*
+ * "Clinical paper" — warm paper in light, ink in dark, a single cool ultramarine accent.
+ * The accent is deliberately cool and blue so that green / amber / red remain exclusively
+ * the language of nutrient safety status. Nothing decorative is ever allowed to be red.
+ */
+@theme {
+	--font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--font-display: 'Fraunces Variable', ui-serif, Georgia, serif;
+
+	--color-paper: #faf8f4;
+	--color-surface: #ffffff;
+	--color-raised: #f3f0ea;
+	--color-ink: #101317;
+	--color-ink-soft: #4b5058;
+	--color-ink-faint: #868c95;
+	--color-hairline: #e4dfd6;
+
+	--color-accent: #3d5afe;
+	--color-accent-soft: #eef0ff;
+	--color-accent-ink: #22308f;
+
+	--color-ok: #2e9e6b;
+	--color-ok-soft: #e7f4ed;
+	--color-caution: #c98a18;
+	--color-caution-soft: #fbf1dc;
+	--color-warn: #c4453a;
+	--color-warn-soft: #fbeae8;
+	--color-inert: #8a8f98;
+	--color-inert-soft: #f0eee9;
+
+	--radius-card: 0.875rem;
+}
+
+/*
+ * Dark mode is a class on <html>, set before first paint by the inline script in app.html.
+ * Tailwind v4 needs the variant declared explicitly.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+	--color-paper: #101317;
+	--color-surface: #171b21;
+	--color-raised: #1e232b;
+	--color-ink: #f2efe9;
+	--color-ink-soft: #a7adb6;
+	--color-ink-faint: #6f767f;
+	--color-hairline: #262b33;
+
+	--color-accent: #7c8cff;
+	--color-accent-soft: #1c2340;
+	--color-accent-ink: #c3ccff;
+
+	--color-ok: #4bbd88;
+	--color-ok-soft: #14271f;
+	--color-caution: #dda93f;
+	--color-caution-soft: #2a2214;
+	--color-warn: #e2685c;
+	--color-warn-soft: #2c1917;
+	--color-inert: #767c85;
+	--color-inert-soft: #1d2129;
+}
+
+@layer base {
+	html {
+		background-color: var(--color-paper);
+		color-scheme: light;
+	}
+
+	html.dark {
+		color-scheme: dark;
+	}
+
+	body {
+		background-color: var(--color-paper);
+		color: var(--color-ink);
+		font-family: var(--font-sans);
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	/* Figures line up in columns everywhere in this app. */
+	table,
+	.tnum {
+		font-variant-numeric: tabular-nums;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
+		border-radius: 4px;
+	}
+
+	::selection {
+		background: var(--color-accent);
+		color: white;
+	}
+}
+
+@layer components {
+	.display {
+		font-family: var(--font-display);
+		font-variation-settings:
+			'SOFT' 0,
+			'WONK' 0,
+			'opsz' 40;
+		letter-spacing: -0.015em;
+	}
+
+	/* Hairline card — the single surface primitive the whole app is built from. */
+	.card {
+		background-color: var(--color-surface);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--radius-card);
+	}
+
+	.hairline {
+		border-color: var(--color-hairline);
+	}
+
+	/* Section eyebrow: small, wide-tracked, quiet. */
+	.eyebrow {
+		font-size: 0.6875rem;
+		font-weight: 600;
+		letter-spacing: 0.09em;
+		text-transform: uppercase;
+		color: var(--color-ink-faint);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
